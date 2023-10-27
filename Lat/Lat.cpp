@@ -500,9 +500,8 @@ public:
             cout << "1. Информация о текущих xml файлах в рабочей директории\n";
             cout << "2. Чтение xml файла\n";
             cout << "3. Создание xml файла\n";
-            cout << "4. Запись данных в xml файл\n";
-            cout << "5. Удаление xml файла\n";
-            cout << "6. Выход из работы с xml файлами\n";
+            cout << "4. Удаление xml файла\n";
+            cout << "5. Выход из работы с xml файлами\n";
             cout << "Ваш выбор: ";
             getline(cin, choice);
             cout << endl;
@@ -539,29 +538,33 @@ public:
     //рекурсивный обход дерева
     static void print_xml(const pugi::xml_node& node, int indent = 0) {
         for (int i = 0; i < indent; i++) {
-            std::cout << "  "; // Добавление отступа для каждого уровня
-        }
+        std::cout << "  "; // Добавление отступа для каждого уровня
+    }
 
-        std::cout << "<" << node.name();
+    std::cout << "<" << node.name();
 
-        // Вывод атрибутов
-        for (pugi::xml_attribute attr = node.first_attribute(); attr; attr = attr.next_attribute()) {
-            std::cout << " " << attr.name() << "=\"" << attr.value() << "\"";
-        }
+    // Вывод атрибутов
+    for (pugi::xml_attribute attr = node.first_attribute(); attr; attr = attr.next_attribute()) {
+        std::cout << " " << attr.name() << "=\"" << attr.value() << "\"";
+    }
 
-        if (node.first_child()) {
-            std::cout << ">" << std::endl;
-            for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling()) {
-                print_xml(child, indent + 1); // Рекурсивный вызов для дочерних элементов
-            }
-            for (int i = 0; i < indent; i++) {
-                std::cout << "  "; // Добавление отступа перед закрывающим тегом
-            }
-            std::cout << "</" << node.name() << ">" << std::endl;
+    if (node.first_child()) {
+        std::cout << ">" << std::endl;
+        for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling()) {
+            print_xml(child, indent + 1); // Рекурсивный вызов для дочерних элементов
         }
-        else {
+        for (int i = 0; i < indent; i++) {
+            std::cout << "  "; // Добавление отступа перед закрывающим тегом
+        }
+        std::cout << "</" << node.name() << ">" << std::endl;
+    } else {
+        std::string value = node.value();
+        if (!value.empty()) {
+            std::cout << ">" << value << "</" << node.name() << ">" << std::endl;
+        } else {
             std::cout << "/>" << std::endl; // Закрытый тег для элемента без содержимого
         }
+    }
     }
     static void DirectoryXml() {
         for (const auto& entry : std::filesystem::directory_iterator{ "C:/Users/cylct/source/repos/Latypov/Latypov/xml_files" })
@@ -581,10 +584,6 @@ public:
         pugi::xml_document doc;
         if (doc.load_file(("xml_files/" + filename + ".xml").c_str())) {
             std::cout << "XML файл успешно загружен." << std::endl;
-
-            // Теперь вы можете обрабатывать содержимое XML документа с помощью pugixml.
-
-            // Пример: Получение корневого элемента
             pugi::xml_node root = doc.child("root");
 
             print_xml(doc.first_child());
@@ -626,8 +625,8 @@ public:
             cout << endl;
         }
         for (int i = 0; i < intpole;i++) {
-            auto node = root.append_child((list[i]).c_str());
-            node.set_value((listvalues[i]).c_str());
+            pugi::xml_node node = root.append_child((list[i]).c_str());
+            node.append_child(pugi::node_pcdata).set_value((listvalues[i]).c_str());
         }
 
 
