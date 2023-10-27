@@ -961,7 +961,7 @@ void ConsoleWhile() {
             endc = 1;
             break;
         default:
-            cout << "Неизвестная команда";
+            cout << "Неизвестная команда ";
             break;
         }
         cout << endl << endl;
