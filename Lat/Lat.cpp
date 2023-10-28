@@ -1,4 +1,4 @@
-
+п»ї
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -27,7 +27,7 @@
 using json = nlohmann::json;
 namespace fs = std::filesystem;
 using namespace std;
-//Директория существует (да или нет)
+//Р”РёСЂРµРєС‚РѕСЂРёСЏ СЃСѓС‰РµСЃС‚РІСѓРµС‚ (РґР° РёР»Рё РЅРµС‚)
 bool fileExists(string filename)
 {
     struct stat buf;
@@ -37,13 +37,13 @@ bool fileExists(string filename)
     }
     return false;
 }
-//Проверка строки на число
+//РџСЂРѕРІРµСЂРєР° СЃС‚СЂРѕРєРё РЅР° С‡РёСЃР»Рѕ
 bool is_number(const string& s)
 {
     return !s.empty() && find_if(s.begin(),
         s.end(), [](unsigned char c) { return !isdigit(c); }) == s.end();
 }
-//Проверка на существование директории
+//РџСЂРѕРІРµСЂРєР° РЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ РґРёСЂРµРєС‚РѕСЂРёРё
 bool dirExists(string dirName_in)
 {
     DWORD ftyp = GetFileAttributesA(dirName_in.c_str());
@@ -53,7 +53,7 @@ bool dirExists(string dirName_in)
         return true;
     return false;
 }
-//Вывод информации о дисках
+//Р’С‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РґРёСЃРєР°С…
 void GetInfo()
 {
     int n;
@@ -72,10 +72,10 @@ void GetInfo()
             SetErrorMode(OldErrorMode);
             if (ready)
             {
-                cout << "Имя диска: ";
+                cout << "РРјСЏ РґРёСЃРєР°: ";
                 cout << lPath;
                 UINT drive_type = GetDriveTypeA(lPath.c_str());
-                cout << "\nТип диска: ";
+                cout << "\nРўРёРї РґРёСЃРєР°: ";
                 if (drive_type == DRIVE_REMOVABLE) cout << "REMOVABLE";
                 else if (drive_type == DRIVE_FIXED)     cout << "HARD DISK";
                 else if (drive_type == DRIVE_REMOTE)    cout << "REMOTE";
@@ -95,18 +95,18 @@ void GetInfo()
                 {
                     __int64 FreeGiga = TotalNumberOfFreeBytes / 1024 / 1024 / 1024;
                     __int64 TotalGiga = TotalNumberOfBytes / 1024 / 1024 / 1024;
-                    cout << "\nСвободно на диске: " + to_string(FreeGiga) + " ГБ\n";
-                    cout << "Всего на диске: " + to_string(TotalGiga) + " ГБ\n";
+                    cout << "\nРЎРІРѕР±РѕРґРЅРѕ РЅР° РґРёСЃРєРµ: " + to_string(FreeGiga) + " Р“Р‘\n";
+                    cout << "Р’СЃРµРіРѕ РЅР° РґРёСЃРєРµ: " + to_string(TotalGiga) + " Р“Р‘\n";
                 }
-                else cout << "Ошибка в GetDiskFreeSpaceEx\n";
+                else cout << "РћС€РёР±РєР° РІ GetDiskFreeSpaceEx\n";
                 USES_CONVERSION_EX;
                 LPWSTR afjha = A2W_EX(lPath.c_str(), lPath.length());
                 _TCHAR FileSysteNameT[32] = _T("");
                 Flag = GetVolumeInformation(afjha, NULL, NULL, NULL, NULL, NULL, FileSysteNameT, 32);
                 wstring FileSysteNameW(&FileSysteNameT[0]);
                 string FileSysteNameS(FileSysteNameW.begin(), FileSysteNameW.end());
-                if (Flag)   cout << "Файловая система: " + FileSysteNameS + "\n";
-                else        cout << "Ошибка в GetVolumeInformation\n";
+                if (Flag)   cout << "Р¤Р°Р№Р»РѕРІР°СЏ СЃРёСЃС‚РµРјР°: " + FileSysteNameS + "\n";
+                else        cout << "РћС€РёР±РєР° РІ GetVolumeInformation\n";
             }
             cout << endl;
         }
@@ -114,26 +114,26 @@ void GetInfo()
     }
 
 }
-//Работа с файлами
+//Р Р°Р±РѕС‚Р° СЃ С„Р°Р№Р»Р°РјРё
 class FileHandler {
 public:
     static void File_cycle() {
         int endc = 0;
         string choice = "";
         while (endc == 0) {
-            cout << "[Работа с файлами] Выберите необходимую функцию:\n";
-            cout << "1. Информация о текущих txt файлах в рабочей директории\n";
-            cout << "2. Чтение файла\n";
-            cout << "3. Создание файла\n";
-            cout << "4. Запись данных в файл\n";
-            cout << "5. Удаление файла\n";
-            cout << "6. Выход из работы с файлами\n";
-            cout << "Ваш выбор: ";
+            cout << "[Р Р°Р±РѕС‚Р° СЃ С„Р°Р№Р»Р°РјРё] Р’С‹Р±РµСЂРёС‚Рµ РЅРµРѕР±С…РѕРґРёРјСѓСЋ С„СѓРЅРєС†РёСЋ:\n";
+            cout << "1. РРЅС„РѕСЂРјР°С†РёСЏ Рѕ С‚РµРєСѓС‰РёС… txt С„Р°Р№Р»Р°С… РІ СЂР°Р±РѕС‡РµР№ РґРёСЂРµРєС‚РѕСЂРёРё\n";
+            cout << "2. Р§С‚РµРЅРёРµ С„Р°Р№Р»Р°\n";
+            cout << "3. РЎРѕР·РґР°РЅРёРµ С„Р°Р№Р»Р°\n";
+            cout << "4. Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»\n";
+            cout << "5. РЈРґР°Р»РµРЅРёРµ С„Р°Р№Р»Р°\n";
+            cout << "6. Р’С‹С…РѕРґ РёР· СЂР°Р±РѕС‚С‹ СЃ С„Р°Р№Р»Р°РјРё\n";
+            cout << "Р’Р°С€ РІС‹Р±РѕСЂ: ";
             getline(cin, choice);
             cout << endl;
             if ((is_number(choice) == 0) or choice == "")
             {
-                cout << "Введено неправильное значение. Повторите.\n\n";
+                cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ. РџРѕРІС‚РѕСЂРёС‚Рµ.\n\n";
                 continue;
             }
             int intchoice = stoi(choice);
@@ -158,7 +158,7 @@ public:
                 endc = 1;
                 break;
             default:
-                cout << "Неизвестная команда";
+                cout << "РќРµРёР·РІРµСЃС‚РЅР°СЏ РєРѕРјР°РЅРґР°";
                 break;
             }
             cout << endl;
@@ -171,100 +171,100 @@ public:
     static void ReadFile() {
         string filename = "";
         string text = "";
-        cout << "Введите имя файла для чтения: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ С‡С‚РµРЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         ifstream fin("txt_files/" + filename + ".txt");
         if (fin) {
             getline(fin, text);
             fin >> text;
-            cout << "Текст в файле " + filename + ".txt :\n";
+            cout << "РўРµРєСЃС‚ РІ С„Р°Р№Р»Рµ " + filename + ".txt :\n";
             cout << text;
             fin.close();
         }
         else {
-            cout << "Файла нет либо его нельзя открыть\n";
+            cout << "Р¤Р°Р№Р»Р° РЅРµС‚ Р»РёР±Рѕ РµРіРѕ РЅРµР»СЊР·СЏ РѕС‚РєСЂС‹С‚СЊ\n";
             return;
         }
     }
     static void CreateFile() {
         string filename = "";
         string text = "";
-        cout << "Введите имя создаваемого файла: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°: ";
         getline(cin, filename);
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         if (fileExists("txt_files/" + filename + ".txt") == 0) {
             ofstream fin("txt_files/" + filename + ".txt");
-            cout << "Что добавить в файл:\n";
+            cout << "Р§С‚Рѕ РґРѕР±Р°РІРёС‚СЊ РІ С„Р°Р№Р»:\n";
             getline(cin, text);
             cout << endl;
             if (text == "")
             {
-                cout << "Введено неправильное значение.\n\n";
+                cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
                 return;
             }
             fin << text;
-            cout << "Файл создан\n";
+            cout << "Р¤Р°Р№Р» СЃРѕР·РґР°РЅ\n";
             fin.close();
         }
         else
         {
-            cout << "Файл с таким именем уже существует\n";
+            cout << "Р¤Р°Р№Р» СЃ С‚Р°РєРёРј РёРјРµРЅРµРј СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚\n";
             return;
         }
     }
     static void RedactFile() {
         string filename = "";
         string text = "";
-        cout << "Введите имя файла для редактирования: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         ifstream fin("txt_files/" + filename + ".txt");
         if (fin) {
             getline(fin, text);
             fin >> text;
-            cout << "Текст в файле " + filename + ".txt :\n";
+            cout << "РўРµРєСЃС‚ РІ С„Р°Р№Р»Рµ " + filename + ".txt :\n";
             cout << text;
             fin.close();
         }
         else
         {
-            cout << "Файла нет либо его нельзя открыть\n";
+            cout << "Р¤Р°Р№Р»Р° РЅРµС‚ Р»РёР±Рѕ РµРіРѕ РЅРµР»СЊР·СЏ РѕС‚РєСЂС‹С‚СЊ\n";
             return;
         }
-        cout << "Что добавить в файл:\n";
+        cout << "Р§С‚Рѕ РґРѕР±Р°РІРёС‚СЊ РІ С„Р°Р№Р»:\n";
         string text2 = "";
         getline(cin, text2);
         cout << endl;
         if (text2 == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         text = text + text2;
         ofstream fout("txt_files/" + filename + ".txt");
         if (fout)
         {
-            cout << "Файл редактирован\n";
+            cout << "Р¤Р°Р№Р» СЂРµРґР°РєС‚РёСЂРѕРІР°РЅ\n";
             fout << text;
             fout.close();
         }
         else {
-            cout << "Файл нельзя открыть\n";
+            cout << "Р¤Р°Р№Р» РЅРµР»СЊР·СЏ РѕС‚РєСЂС‹С‚СЊ\n";
             return;
         }
 
@@ -272,44 +272,44 @@ public:
     static void DeleteFile() {
         string filename = "";
         string text = "";
-        cout << "Введите имя файла для удаления: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         if (!remove(("txt_files/" + filename + ".txt").c_str()))
         {
-            cout << "Файл " << filename << ".txt удалён\n";
+            cout << "Р¤Р°Р№Р» " << filename << ".txt СѓРґР°Р»С‘РЅ\n";
         }
         else {
-            cout << "Такого файла нет\n";
+            cout << "РўР°РєРѕРіРѕ С„Р°Р№Р»Р° РЅРµС‚\n";
             return;
         }
     }
 };
-//Работа с джсон
+//Р Р°Р±РѕС‚Р° СЃ РґР¶СЃРѕРЅ
 class JsonHandler {
 public:
     static void Json_cycle() {
         int endc = 0;
         string choice = "";
         while (endc == 0) {
-            cout << "[Работа с json] Выберите необходимую функцию:\n";
-            cout << "1. Информация о текущих json файлах в рабочей директории\n";
-            cout << "2. Чтение json файла\n";
-            cout << "3. Создание json файла\n";
-            cout << "4. Запись данных в json файл\n";
-            cout << "5. Удаление json файла\n";
-            cout << "6. Выход из работы с json файлами\n";
-            cout << "Ваш выбор: ";
+            cout << "[Р Р°Р±РѕС‚Р° СЃ json] Р’С‹Р±РµСЂРёС‚Рµ РЅРµРѕР±С…РѕРґРёРјСѓСЋ С„СѓРЅРєС†РёСЋ:\n";
+            cout << "1. РРЅС„РѕСЂРјР°С†РёСЏ Рѕ С‚РµРєСѓС‰РёС… json С„Р°Р№Р»Р°С… РІ СЂР°Р±РѕС‡РµР№ РґРёСЂРµРєС‚РѕСЂРёРё\n";
+            cout << "2. Р§С‚РµРЅРёРµ json С„Р°Р№Р»Р°\n";
+            cout << "3. РЎРѕР·РґР°РЅРёРµ json С„Р°Р№Р»Р°\n";
+            cout << "4. Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІ json С„Р°Р№Р»\n";
+            cout << "5. РЈРґР°Р»РµРЅРёРµ json С„Р°Р№Р»Р°\n";
+            cout << "6. Р’С‹С…РѕРґ РёР· СЂР°Р±РѕС‚С‹ СЃ json С„Р°Р№Р»Р°РјРё\n";
+            cout << "Р’Р°С€ РІС‹Р±РѕСЂ: ";
             getline(cin, choice);
             cout << endl;
             if ((is_number(choice) == 0) or choice == "")
             {
-                cout << "Введено неправильное значение. Повторите.\n\n";
+                cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ. РџРѕРІС‚РѕСЂРёС‚Рµ.\n\n";
                 continue;
             }
             int intchoice = stoi(choice);
@@ -334,7 +334,7 @@ public:
                 endc = 1;
                 break;
             default:
-                cout << "Неизвестная команда";
+                cout << "РќРµРёР·РІРµСЃС‚РЅР°СЏ РєРѕРјР°РЅРґР°";
                 break;
             }
             cout << endl;
@@ -348,24 +348,24 @@ public:
         string filename = "";
         string text = "";
         json data;
-        cout << "Введите имя файла для чтения: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ С‡С‚РµРЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         ifstream fin("json_files/" + filename + ".json");
         if (fin) {
             fin >> data;
-            cout << "Данные JSON файла:" << endl;
+            cout << "Р”Р°РЅРЅС‹Рµ JSON С„Р°Р№Р»Р°:" << endl;
             cout << data.dump(4) << endl;
             fin.close();
         }
         else
         {
-            cout << "Файла нет либо его нельзя открыть\n";
+            cout << "Р¤Р°Р№Р»Р° РЅРµС‚ Р»РёР±Рѕ РµРіРѕ РЅРµР»СЊР·СЏ РѕС‚РєСЂС‹С‚СЊ\n";
             return;
         }
     }
@@ -373,24 +373,24 @@ public:
         string jsonFile = "data.json";
         json data;
         string pole;
-        cout << "Сколько полей у вас будет(макс 10): ";
+        cout << "РЎРєРѕР»СЊРєРѕ РїРѕР»РµР№ Сѓ РІР°СЃ Р±СѓРґРµС‚(РјР°РєСЃ 10): ";
         getline(cin, pole);
         cout << endl;
         string polename = "";
         if ((is_number(pole) == 0) or pole == "")
         {
 
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         int intpole = stoi(pole);
         string list[10];
         string listvalues[10];
         for (int i = 0; i < intpole;i++) {
-            cout << "Введите имя поля " + to_string(i + 1) + " : ";
+            cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РїРѕР»СЏ " + to_string(i + 1) + " : ";
             getline(cin, pole);
             list[i] = pole;
-            cout << "Введите значение поля " + to_string(i + 1) + " : ";
+            cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ " + to_string(i + 1) + " : ";
             getline(cin, pole);
             listvalues[i] = pole;
             cout << endl;
@@ -401,12 +401,12 @@ public:
 
         string filename = "";
         string text = "";
-        cout << "Введите имя создаваемого json файла: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ json С„Р°Р№Р»Р°: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         if (fileExists("json_files/" + filename + ".json") == 0) {
@@ -415,7 +415,7 @@ public:
             file.close();
         }
         else {
-            cout << "Файл с таким именем уже существует\n";
+            cout << "Р¤Р°Р№Р» СЃ С‚Р°РєРёРј РёРјРµРЅРµРј СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚\n";
             return;
         }
     }
@@ -423,91 +423,91 @@ public:
         string filename = "";
         string text = "";
         json data;
-        cout << "Введите имя файла для редактирования: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         ifstream fin("json_files/" + filename + ".json");
         if (fin) {
             fin >> data;
-            cout << "Данные JSON файла:" << endl;
+            cout << "Р”Р°РЅРЅС‹Рµ JSON С„Р°Р№Р»Р°:" << endl;
             cout << data.dump(4) << endl;
             fin.close();
         }
         else
         {
-            cout << "Файла нет либо его нельзя открыть\n";
+            cout << "Р¤Р°Р№Р»Р° РЅРµС‚ Р»РёР±Рѕ РµРіРѕ РЅРµР»СЊР·СЏ РѕС‚РєСЂС‹С‚СЊ\n";
             return;
         }
         json data2;
         data2 = data;
         string param = "";
-        cout << "Какой параметр изменить: ";
+        cout << "РљР°РєРѕР№ РїР°СЂР°РјРµС‚СЂ РёР·РјРµРЅРёС‚СЊ: ";
         getline(cin, param);
         cout << endl;
         if (param == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         string newvalue = "";
-        cout << "На какое значение: ";
+        cout << "РќР° РєР°РєРѕРµ Р·РЅР°С‡РµРЅРёРµ: ";
         getline(cin, newvalue);
         cout << endl;
         if (newvalue == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         data2[param] = newvalue;
         ofstream file("json_files/" + filename + ".json");
         file << data2.dump(4); // Indented JSON output
         file.close();
-        cout << "Файл редактирован\n";
+        cout << "Р¤Р°Р№Р» СЂРµРґР°РєС‚РёСЂРѕРІР°РЅ\n";
     }
     static void DeleteJson() {
         string filename = "";
         string text = "";
-        cout << "Введите имя файла для удаления: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         if (!remove(("json_files/" + filename + ".json").c_str()))
         {
-            cout << "Файл " << filename << ".json удалён\n";
+            cout << "Р¤Р°Р№Р» " << filename << ".json СѓРґР°Р»С‘РЅ\n";
         }
         else {
-            cout << "Такого файла нет\n";
+            cout << "РўР°РєРѕРіРѕ С„Р°Р№Р»Р° РЅРµС‚\n";
         }
     }
 };
-//Работа с хмл
+//Р Р°Р±РѕС‚Р° СЃ С…РјР»
 class XmlHandler {
 public:
     static void Xml_cycle() {
         int endc = 0;
         string choice = "";
         while (endc == 0) {
-            cout << "[Работа с xml] Выберите необходимую функцию:\n";
-            cout << "1. Информация о текущих xml файлах в рабочей директории\n";
-            cout << "2. Чтение xml файла\n";
-            cout << "3. Создание xml файла\n";
-            cout << "4. Удаление xml файла\n";
-            cout << "5. Выход из работы с xml файлами\n";
-            cout << "Ваш выбор: ";
+            cout << "[Р Р°Р±РѕС‚Р° СЃ xml] Р’С‹Р±РµСЂРёС‚Рµ РЅРµРѕР±С…РѕРґРёРјСѓСЋ С„СѓРЅРєС†РёСЋ:\n";
+            cout << "1. РРЅС„РѕСЂРјР°С†РёСЏ Рѕ С‚РµРєСѓС‰РёС… xml С„Р°Р№Р»Р°С… РІ СЂР°Р±РѕС‡РµР№ РґРёСЂРµРєС‚РѕСЂРёРё\n";
+            cout << "2. Р§С‚РµРЅРёРµ xml С„Р°Р№Р»Р°\n";
+            cout << "3. РЎРѕР·РґР°РЅРёРµ xml С„Р°Р№Р»Р°\n";
+            cout << "4. РЈРґР°Р»РµРЅРёРµ xml С„Р°Р№Р»Р°\n";
+            cout << "5. Р’С‹С…РѕРґ РёР· СЂР°Р±РѕС‚С‹ СЃ xml С„Р°Р№Р»Р°РјРё\n";
+            cout << "Р’Р°С€ РІС‹Р±РѕСЂ: ";
             getline(cin, choice);
             cout << endl;
             if ((is_number(choice) == 0) or choice == "")
             {
-                cout << "Введено неправильное значение. Повторите.\n\n";
+                cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ. РџРѕРІС‚РѕСЂРёС‚Рµ.\n\n";
                 continue;
             }
             int intchoice = stoi(choice);
@@ -529,21 +529,21 @@ public:
                 endc = 1;
                 break;
             default:
-                cout << "Неизвестная команда";
+                cout << "РќРµРёР·РІРµСЃС‚РЅР°СЏ РєРѕРјР°РЅРґР°";
                 break;
             }
             cout << endl;
         }
     }
-    //рекурсивный обход дерева
+    //СЂРµРєСѓСЂСЃРёРІРЅС‹Р№ РѕР±С…РѕРґ РґРµСЂРµРІР°
     static void print_xml(const pugi::xml_node& node, int indent = 0) {
         for (int i = 0; i < indent; i++) {
-        std::cout << "  "; // Добавление отступа для каждого уровня
+        std::cout << "  "; // Р”РѕР±Р°РІР»РµРЅРёРµ РѕС‚СЃС‚СѓРїР° РґР»СЏ РєР°Р¶РґРѕРіРѕ СѓСЂРѕРІРЅСЏ
     }
 
     std::cout << "<" << node.name();
 
-    // Вывод атрибутов
+    // Р’С‹РІРѕРґ Р°С‚СЂРёР±СѓС‚РѕРІ
     for (pugi::xml_attribute attr = node.first_attribute(); attr; attr = attr.next_attribute()) {
         std::cout << " " << attr.name() << "=\"" << attr.value() << "\"";
     }
@@ -551,10 +551,10 @@ public:
     if (node.first_child()) {
         std::cout << ">" << std::endl;
         for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling()) {
-            print_xml(child, indent + 1); // Рекурсивный вызов для дочерних элементов
+            print_xml(child, indent + 1); // Р РµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹Р·РѕРІ РґР»СЏ РґРѕС‡РµСЂРЅРёС… СЌР»РµРјРµРЅС‚РѕРІ
         }
         for (int i = 0; i < indent; i++) {
-            std::cout << "  "; // Добавление отступа перед закрывающим тегом
+            std::cout << "  "; // Р”РѕР±Р°РІР»РµРЅРёРµ РѕС‚СЃС‚СѓРїР° РїРµСЂРµРґ Р·Р°РєСЂС‹РІР°СЋС‰РёРј С‚РµРіРѕРј
         }
         std::cout << "</" << node.name() << ">" << std::endl;
     } else {
@@ -562,7 +562,7 @@ public:
         if (!value.empty()) {
             std::cout << ">" << value << "</" << node.name() << ">" << std::endl;
         } else {
-            std::cout << "/>" << std::endl; // Закрытый тег для элемента без содержимого
+            std::cout << "/>" << std::endl; // Р—Р°РєСЂС‹С‚С‹Р№ С‚РµРі РґР»СЏ СЌР»РµРјРµРЅС‚Р° Р±РµР· СЃРѕРґРµСЂР¶РёРјРѕРіРѕ
         }
     }
     }
@@ -573,23 +573,23 @@ public:
     static void ReadXml() {
         string filename = "";
         string text = "";
-        cout << "Введите имя файла для чтения: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ С‡С‚РµРЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         pugi::xml_document doc;
         if (doc.load_file(("xml_files/" + filename + ".xml").c_str())) {
-            std::cout << "XML файл успешно загружен." << std::endl;
+            std::cout << "XML С„Р°Р№Р» СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР¶РµРЅ." << std::endl;
             pugi::xml_node root = doc.child("root");
 
             print_xml(doc.first_child());
         }
         else {
-            std::cerr << "Ошибка при загрузке XML файла." << std::endl;
+            std::cerr << "РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ XML С„Р°Р№Р»Р°." << std::endl;
         }
 
 
@@ -602,24 +602,24 @@ public:
         declarationNode.append_attribute("standalone") = "yes";
         auto root = doc.append_child("root");
         string pole;
-        cout << "Сколько полей у вас будет(макс 10): ";
+        cout << "РЎРєРѕР»СЊРєРѕ РїРѕР»РµР№ Сѓ РІР°СЃ Р±СѓРґРµС‚(РјР°РєСЃ 10): ";
         getline(cin, pole);
         cout << endl;
         string polename = "";
         if ((is_number(pole) == 0) or pole == "")
         {
 
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         int intpole = stoi(pole);
         string list[10];
         string listvalues[10];
         for (int i = 0; i < intpole;i++) {
-            cout << "Введите имя поля " + to_string(i + 1) + " : ";
+            cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ РїРѕР»СЏ " + to_string(i + 1) + " : ";
             getline(cin, pole);
             list[i] = pole;
-            cout << "Введите значение поля " + to_string(i + 1) + " : ";
+            cout << "Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ " + to_string(i + 1) + " : ";
             getline(cin, pole);
             listvalues[i] = pole;
             cout << endl;
@@ -633,73 +633,73 @@ public:
 
         string filename = "";
         string text = "";
-        cout << "Введите имя создаваемого xml файла: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ xml С„Р°Р№Р»Р°: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         if (doc.save_file(("xml_files/" + filename + ".xml").c_str())) {
-            cout << "Файл " + filename + ".xml создан";
+            cout << "Р¤Р°Р№Р» " + filename + ".xml СЃРѕР·РґР°РЅ";
         }
         else
-            cout << "Ошибка в создани файла";
+            cout << "РћС€РёР±РєР° РІ СЃРѕР·РґР°РЅРё С„Р°Р№Р»Р°";
     }
     static void DeleteXml() {
         string filename = "";
         string text = "";
-        cout << "Введите имя файла для удаления: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         if (!remove(("xml_files/" + filename + ".xml").c_str()))
         {
-            cout << "Файл " << filename << ".xml удалён\n";
+            cout << "Р¤Р°Р№Р» " << filename << ".xml СѓРґР°Р»С‘РЅ\n";
         }
         else {
-            cout << "Такого файла нет\n";
+            cout << "РўР°РєРѕРіРѕ С„Р°Р№Р»Р° РЅРµС‚\n";
         }
     }
 
     static void Write(string filename, string content) {
-        cout << "4.2. Запись данных\n";
+        cout << "4.2. Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С…\n";
         pugi::xml_document doc;
         if (doc.load_file(filename.c_str())) {
             pugi::xml_node root = doc.document_element();
             root.text().set(content.c_str());
             doc.save_file(filename.c_str());
-            cout << "Введённые данные: " << filename << endl;
+            cout << "Р’РІРµРґС‘РЅРЅС‹Рµ РґР°РЅРЅС‹Рµ: " << filename << endl;
         }
         else {
-            cout << "Ошибка в создании XML файла: " << filename << endl;
+            cout << "РћС€РёР±РєР° РІ СЃРѕР·РґР°РЅРёРё XML С„Р°Р№Р»Р°: " << filename << endl;
         }
     }
 };
-//Работа с зип
+//Р Р°Р±РѕС‚Р° СЃ Р·РёРї
 class ZipHandler {
 public:
     static void Zip_cycle() {
         int endc = 0;
         string choice = "";
         while (endc == 0) {
-            cout << "[Работа с zip] Выберите необходимую функцию:\n";
-            cout << "1. Информация о файлах которые можно заархивировать и об имеющихся архивах\n";
-            cout << "2. Разархивирование\n";
-            cout << "3. Создание Архива\n";
-            cout << "4. Удаление Архива\n";
-            cout << "5. Выход из работы с xml файлами\n";
-            cout << "Ваш выбор: ";
+            cout << "[Р Р°Р±РѕС‚Р° СЃ zip] Р’С‹Р±РµСЂРёС‚Рµ РЅРµРѕР±С…РѕРґРёРјСѓСЋ С„СѓРЅРєС†РёСЋ:\n";
+            cout << "1. РРЅС„РѕСЂРјР°С†РёСЏ Рѕ С„Р°Р№Р»Р°С… РєРѕС‚РѕСЂС‹Рµ РјРѕР¶РЅРѕ Р·Р°Р°СЂС…РёРІРёСЂРѕРІР°С‚СЊ Рё РѕР± РёРјРµСЋС‰РёС…СЃСЏ Р°СЂС…РёРІР°С…\n";
+            cout << "2. Р Р°Р·Р°СЂС…РёРІРёСЂРѕРІР°РЅРёРµ\n";
+            cout << "3. РЎРѕР·РґР°РЅРёРµ РђСЂС…РёРІР°\n";
+            cout << "4. РЈРґР°Р»РµРЅРёРµ РђСЂС…РёРІР°\n";
+            cout << "5. Р’С‹С…РѕРґ РёР· СЂР°Р±РѕС‚С‹ СЃ xml С„Р°Р№Р»Р°РјРё\n";
+            cout << "Р’Р°С€ РІС‹Р±РѕСЂ: ";
             getline(cin, choice);
             cout << endl;
             if ((is_number(choice) == 0) or choice == "")
             {
-                cout << "Введено неправильное значение. Повторите.\n\n";
+                cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ. РџРѕРІС‚РѕСЂРёС‚Рµ.\n\n";
                 continue;
             }
             int intchoice = stoi(choice);
@@ -721,34 +721,34 @@ public:
                 endc = 1;
                 break;
             default:
-                cout << "Неизвестная команда";
+                cout << "РќРµРёР·РІРµСЃС‚РЅР°СЏ РєРѕРјР°РЅРґР°";
                 break;
             }
             cout << endl;
         }
     }
     static void DirectoryZip() {
-        cout << "Текстовые файлы:\n";
+        cout << "РўРµРєСЃС‚РѕРІС‹Рµ С„Р°Р№Р»С‹:\n";
         for (const auto& entry : std::filesystem::directory_iterator{ "C:/Users/cylct/source/repos/Latypov/Latypov/txt_files" })
             std::cout << entry.path().filename() << std::endl;
-        cout << "\nJson файлы:\n";
+        cout << "\nJson С„Р°Р№Р»С‹:\n";
         for (const auto& entry : std::filesystem::directory_iterator{ "C:/Users/cylct/source/repos/Latypov/Latypov/json_files" })
             std::cout << entry.path().filename() << std::endl;
-        cout << "\nXml файлы:\n";
+        cout << "\nXml С„Р°Р№Р»С‹:\n";
         for (const auto& entry : std::filesystem::directory_iterator{ "C:/Users/cylct/source/repos/Latypov/Latypov/xml_files" })
             std::cout << entry.path().filename() << std::endl;
-        cout << "\nZip файлы:\n";
+        cout << "\nZip С„Р°Р№Р»С‹:\n";
         for (const auto& entry : std::filesystem::directory_iterator{ "C:/Users/cylct/source/repos/Latypov/Latypov/zip_files" })
             std::cout << entry.path().filename() << std::endl;
     }
     static void UnZip() {
         string filename = "";
-        cout << "Введите имя файла для разархивирования: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СЂР°Р·Р°СЂС…РёРІРёСЂРѕРІР°РЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         filename = "zip_files/" + filename + ".zip";
@@ -768,29 +768,29 @@ public:
         }
 
         CloseZip(hz2);
-        cout << "Файл Разархивирован";
+        cout << "Р¤Р°Р№Р» Р Р°Р·Р°СЂС…РёРІРёСЂРѕРІР°РЅ";
     }
     static void Zip() {
         string filename = "";
-        cout << "Введите имя архива: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ Р°СЂС…РёРІР°: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         filename = "zip_files/" + filename + ".zip";
         TCHAR* param = new TCHAR[filename.size() + 1];
         param[filename.size()] = 0;
         std::copy(filename.begin(), filename.end(), param);
-        cout << "Какой файл заархивировать (с расширением (.txt, .json, .xml)): ";
+        cout << "РљР°РєРѕР№ С„Р°Р№Р» Р·Р°Р°СЂС…РёРІРёСЂРѕРІР°С‚СЊ (СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј (.txt, .json, .xml)): ";
         string filetozip = "";
         getline(cin, filetozip);
         cout << endl;
         if (filetozip == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         string extension = "";
@@ -818,29 +818,29 @@ public:
         HZIP hz = CreateZip(param, 0);
         ZipAdd(hz, param2, param3);
         CloseZip(hz);
-        cout << "Файл архивирован";
+        cout << "Р¤Р°Р№Р» Р°СЂС…РёРІРёСЂРѕРІР°РЅ";
     }
     static void DeleteZip() {
         string filename = "";
         string text = "";
-        cout << "Введите имя файла для удаления: ";
+        cout << "Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ: ";
         getline(cin, filename);
         cout << endl;
         if (filename == "")
         {
-            cout << "Введено неправильное значение.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ.\n\n";
             return;
         }
         if (!remove(("zip_files/" + filename + ".zip").c_str()))
         {
-            cout << "Файл " << filename << ".zip удалён\n";
+            cout << "Р¤Р°Р№Р» " << filename << ".zip СѓРґР°Р»С‘РЅ\n";
         }
         else {
-            cout << "Такого файла нет\n";
+            cout << "РўР°РєРѕРіРѕ С„Р°Р№Р»Р° РЅРµС‚\n";
         }
     }
 };
-//Работа с потоками
+//Р Р°Р±РѕС‚Р° СЃ РїРѕС‚РѕРєР°РјРё
 
 std::string sha256(const std::string& input) {
     unsigned char hash[SHA256_DIGEST_LENGTH];
@@ -859,13 +859,13 @@ std::string sha256(const std::string& input) {
     return hashStr;
 }
 
-// Функция для проверки, соответствует ли хеш заданному значению
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ Р»Рё С…РµС€ Р·Р°РґР°РЅРЅРѕРјСѓ Р·РЅР°С‡РµРЅРёСЋ
 bool isHashMatching(const std::string& input, const std::string& targetHash) {
     std::string hash = sha256(input);
     return hash == targetHash;
 }
 
-// Функция для перебора паролей в заданном диапазоне
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРµСЂРµР±РѕСЂР° РїР°СЂРѕР»РµР№ РІ Р·Р°РґР°РЅРЅРѕРј РґРёР°РїР°Р·РѕРЅРµ
 void bruteForcePasswords(const std::string& targetHash, char start, char end, int threadNum, int numThreads) {
     std::string password(5, 'a');
 
@@ -875,7 +875,7 @@ void bruteForcePasswords(const std::string& targetHash, char start, char end, in
                 for (password[3] = 'a'; password[3] <= 'z'; password[3]++) {
                     for (password[4] = 'a'; password[4] <= 'z'; password[4]++) {
                         if (isHashMatching(password, targetHash)) {
-                            std::cout << "Поток " << threadNum << " Пароль найден: " << password << std::endl;
+                            std::cout << "РџРѕС‚РѕРє " << threadNum << " РџР°СЂРѕР»СЊ РЅР°Р№РґРµРЅ: " << password << std::endl;
                             return;
                         }
                     }
@@ -888,17 +888,17 @@ void bruteForcePasswords(const std::string& targetHash, char start, char end, in
 void PasswdStream() {
     std::string targetHash = "1115dd800feaacefdf481f1f9070374a2a81e27880f187396db67958b207cbad";
     string choice;
-    // Многопоточный режим
-    cout << "Введите число потоков(1-4): ";
+    // РњРЅРѕРіРѕРїРѕС‚РѕС‡РЅС‹Р№ СЂРµР¶РёРј
+    cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РїРѕС‚РѕРєРѕРІ(1-4): ";
     getline(cin, choice);
     cout << endl;
     if ((is_number(choice) <= 0) or choice == "" or (is_number(choice) > 4))
     {
-        cout << "Введено неправильное значение. Повторите.\n\n";
+        cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ. РџРѕРІС‚РѕСЂРёС‚Рµ.\n\n";
         return;
     }
 
-    int numThreads = stoi(choice); // Количество потоков (можно изменить)
+    int numThreads = stoi(choice); // РљРѕР»РёС‡РµСЃС‚РІРѕ РїРѕС‚РѕРєРѕРІ (РјРѕР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ)
     std::vector<std::thread> threads;
     auto startTime = std::chrono::high_resolution_clock::now();
 
@@ -913,26 +913,26 @@ void PasswdStream() {
     }
     auto endTime = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-    std::cout << "Времени потребовалось: " << duration << " сек" << std::endl;
+    std::cout << "Р’СЂРµРјРµРЅРё РїРѕС‚СЂРµР±РѕРІР°Р»РѕСЃСЊ: " << duration << " СЃРµРє" << std::endl;
 }
 void ConsoleWhile() {
     int endc = 0;
     string choice = "";
     while (endc == 0) {
-        cout << "[Меню] Выберите необходимую функцию:\n";
-        cout << "1. Информация о дисках\n";
-        cout << "2. Работа с файлами\n";
-        cout << "3. Работа с json\n";
-        cout << "4. Работа с xml\n";
-        cout << "5. Работа с zip архивами\n";
-        cout << "6. Работа с потоками\n";
-        cout << "7. Завершить работу, капитан?\n";
-        cout << "Ваш выбор: ";
+        cout << "[РњРµРЅСЋ] Р’С‹Р±РµСЂРёС‚Рµ РЅРµРѕР±С…РѕРґРёРјСѓСЋ С„СѓРЅРєС†РёСЋ:\n";
+        cout << "1. РРЅС„РѕСЂРјР°С†РёСЏ Рѕ РґРёСЃРєР°С…\n";
+        cout << "2. Р Р°Р±РѕС‚Р° СЃ С„Р°Р№Р»Р°РјРё\n";
+        cout << "3. Р Р°Р±РѕС‚Р° СЃ json\n";
+        cout << "4. Р Р°Р±РѕС‚Р° СЃ xml\n";
+        cout << "5. Р Р°Р±РѕС‚Р° СЃ zip Р°СЂС…РёРІР°РјРё\n";
+        cout << "6. Р Р°Р±РѕС‚Р° СЃ РїРѕС‚РѕРєР°РјРё\n";
+        cout << "7. Р—Р°РІРµСЂС€РёС‚СЊ СЂР°Р±РѕС‚Сѓ, РєР°РїРёС‚Р°РЅ?\n";
+        cout << "Р’Р°С€ РІС‹Р±РѕСЂ: ";
         getline(cin, choice);
         cout << endl;
         if ((is_number(choice) == 0) or choice == "")
         {
-            cout << "Введено неправильное значение. Повторите.\n\n";
+            cout << "Р’РІРµРґРµРЅРѕ РЅРµРїСЂР°РІРёР»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ. РџРѕРІС‚РѕСЂРёС‚Рµ.\n\n";
             continue;
         }
 
@@ -961,7 +961,7 @@ void ConsoleWhile() {
             endc = 1;
             break;
         default:
-            cout << "Неизвестная команда ";
+            cout << "РќРµРёР·РІРµСЃС‚РЅР°СЏ РєРѕРјР°РЅРґР° ";
             break;
         }
         cout << endl << endl;
