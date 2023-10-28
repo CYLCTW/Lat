@@ -27,7 +27,7 @@
 using json = nlohmann::json;
 namespace fs = std::filesystem;
 using namespace std;
-//Проверка существования файла
+//Директория существует
 bool fileExists(string filename)
 {
     struct stat buf;
